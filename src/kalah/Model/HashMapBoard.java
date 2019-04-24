@@ -27,7 +27,7 @@ public class HashMapBoard implements Board {
         return _players.get(playerNo).getStores();
     }
 
-    public class Builder {
+     public static class Builder {
 
         private int _numberOfPlayers;
         private int _housesPerPlayer;
@@ -35,8 +35,9 @@ public class HashMapBoard implements Board {
         private int _storesPerPlayer;
         private int _seedsPerStore;
 
-        public Builder(int numberOfPlayers) {
+        public Builder numberOfPlayers(int numberOfPlayers) {
             _numberOfPlayers = numberOfPlayers;
+            return this;
         }
 
         public Builder housesPerPlayer(int housesPerPlayer) {
@@ -67,7 +68,7 @@ public class HashMapBoard implements Board {
                     houses.add(new House(_seedsPerHouse));
                 }
                 List<Store> stores = new ArrayList<>();
-                for (int j = 0; j< _storesPerPlayer; j++) {
+                for (int j = 0; j < _storesPerPlayer; j++) {
                     stores.add(new Store(_seedsPerStore));
                 }
 
