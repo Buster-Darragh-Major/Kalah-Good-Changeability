@@ -1,4 +1,4 @@
-package kalah.CLI;
+package kalah.Engine;
 
 import kalah.Contracts.Board;
 import kalah.Contracts.SeedManipulation.Incrementable;
@@ -8,10 +8,13 @@ import kalah.Model.SeedStorage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VanillaSeedSower implements SeedSower {
+public class CounterClockwiseSeedSower implements SeedSower {
 
     @Override
     public SeedStorage sowSeedsAmongContainers(int numberOfSeeds, Board board, int player, int startingIndex) {
+        if (board == null) throw new NullPointerException("Board can't be null");
+        if (player <= 0) throw new IllegalArgumentException(String.format("Player index is less than 1, found %d", player));
+
         List<Incrementable> seedContainers = getPlayersContainers(board, player);
         return recurse(numberOfSeeds, board, seedContainers, player, startingIndex, null);
     }

@@ -1,4 +1,4 @@
-package kalah.CLI;
+package kalah.Engine;
 
 import kalah.Contracts.Board;
 import kalah.Contracts.KalahRules;
