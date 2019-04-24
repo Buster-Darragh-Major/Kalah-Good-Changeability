@@ -40,7 +40,7 @@ public class EwansExampleConsoleOutputLookAndFeel implements ConsoleOutputLookAn
         return new StringBuilder()
                 .append(houseNo)
                 .append(HOUSE_OPEN_BRACE)
-                .append(noOfSeeds > 9 ? " " : "") // If seed number is > 9 then we don't need a space after open brace
+                .append(noOfSeeds > 9 ? "" : " ") // If seed number is > 9 then we don't need a space after open brace
                 .append(noOfSeeds)
                 .append(HOUSE_CLOSED_BRACE)
                 .toString();
@@ -49,6 +49,7 @@ public class EwansExampleConsoleOutputLookAndFeel implements ConsoleOutputLookAn
     @Override
     public String storeLabel(int noOfSeeds) {
         return new StringBuilder()
+                .append(noOfSeeds > 9 ? "" : " ") // If seed number is > 9 then we don't need a space before number
                 .append(noOfSeeds)
                 .toString();
     }

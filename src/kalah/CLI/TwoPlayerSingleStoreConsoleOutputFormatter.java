@@ -7,6 +7,8 @@ import kalah.Model.House;
 import kalah.Model.Store;
 
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatter {
 
@@ -27,15 +29,15 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
     @Override
     public String formatOutput(Board board) {
         // Unpack
-        Collection<House> player1Houses = board.getHousesForPlayer(PLAYER_1_INDEX);
-        Collection<House> player2Houses = board.getHousesForPlayer(PLAYER_2_INDEX);
+        List<House> player1Houses = board.getHousesForPlayer(PLAYER_1_INDEX);
+        List<House> player2Houses = board.getHousesForPlayer(PLAYER_2_INDEX);
         Store player1Store = board.getStoresForPlayer(PLAYER_1_INDEX).iterator().next();
         Store player2Store = board.getStoresForPlayer(PLAYER_2_INDEX).iterator().next();
 
         return new StringBuilder()
                 .append(synthesizeLine1And5(player1Houses.size()))
                 .append(NEW_LINE)
-                // TODO: line 2
+                .append(synthesizeLine2(PLAYER_2_INDEX, player2Houses, player1Store))
                 .append(NEW_LINE)
                 .append(synthesizeLine3(player1Houses.size()))
                 .append(NEW_LINE)
@@ -58,6 +60,30 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
         sb.append(_lookAndFeel.cellCorner())
                 .append(repeat(_lookAndFeel.cellRoof(), STORE_WIDTH))
                 .append(_lookAndFeel.cellCorner());
+
+        return sb.toString();
+    }
+
+    private String synthesizeLine2(int playerNumber, List<House> houses, Store playerStore) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(_lookAndFeel.cellWall())
+                .append(_lookAndFeel.whitespace())
+                .append(_lookAndFeel.playerLabel(playerNumber))
+                .append(_lookAndFeel.whitespace());
+
+        int houseIndex = houses.size();
+        for (int i = houses.size() - 1; i >= 0; i--) {
+            sb.append(_lookAndFeel.cellWall())
+                    .append(_lookAndFeel.whitespace())
+                    .append(_lookAndFeel.houseLabel(houseIndex--, houses.get(i).getSeeds()))
+                    .append(_lookAndFeel.whitespace());
+        }
+
+        sb.append(_lookAndFeel.cellWall())
+                .append(_lookAndFeel.whitespace())
+                .append(_lookAndFeel.storeLabel(playerStore.getSeeds()))
+                .append(_lookAndFeel.whitespace())
+                .append(_lookAndFeel.cellWall());
 
         return sb.toString();
     }

@@ -35,6 +35,14 @@ public class TwoPlayerSingleStoreConsoleOutputFormatterTests {
     }
 
     @Test
+    public void TestLine2() {
+        String output = twoPlayerSingleStoreConsoleOutputFormatter.formatOutput(_board);
+        String[] lines = output.split("\n");
+
+        Assert.assertEquals("| P2 | 6[ 4] | 5[ 4] | 4[ 4] | 3[ 4] | 2[ 4] | 1[ 4] |  0 |", lines[1]);
+    }
+
+    @Test
     public void TestLine3() {
         String output = twoPlayerSingleStoreConsoleOutputFormatter.formatOutput(_board);
         String[] lines = output.split("\n");

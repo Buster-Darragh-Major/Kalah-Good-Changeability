@@ -1,22 +1,23 @@
 package kalah.Model;
 
 import java.util.Collection;
+import java.util.List;
 
 public class Player {
 
-    private Collection<House> _houses;
-    private Collection<Store> _store;
+    private List<House> _houses;
+    private List<Store> _store;
 
-    public Player(Collection<House> houses, Collection<Store> store) {
+    public Player(List<House> houses, List<Store> store) {
         _houses = houses;
         _store = store;
     }
 
-    public Collection<Store> getStores() {
+    public List<Store> getStores() {
         return _store;
     }
 
-    public Collection<House> getHouses() {
+    public List<House> getHouses() {
         return _houses;
     }
 }

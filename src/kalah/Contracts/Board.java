@@ -3,14 +3,14 @@ package kalah.Contracts;
 import kalah.Model.House;
 import kalah.Model.Store;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface Board {
 
     int getNumberOfPlayers();
 
-    Collection<House> getHousesForPlayer(int playerNo);
+    List<House> getHousesForPlayer(int playerNo);
 
-    Collection<Store> getStoresForPlayer(int playerNo);
+    List<Store> getStoresForPlayer(int playerNo);
 
 }

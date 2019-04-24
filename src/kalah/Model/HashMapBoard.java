@@ -18,12 +18,12 @@ public class HashMapBoard implements Board {
     }
 
     @Override
-    public Collection<House> getHousesForPlayer(int playerNo) {
+    public List<House> getHousesForPlayer(int playerNo) {
         return _players.get(playerNo).getHouses();
     }
 
     @Override
-    public Collection<Store> getStoresForPlayer(int playerNo) {
+    public List<Store> getStoresForPlayer(int playerNo) {
         return _players.get(playerNo).getStores();
     }
 
