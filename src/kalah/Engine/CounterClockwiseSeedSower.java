@@ -4,6 +4,7 @@ import kalah.Contracts.Board;
 import kalah.Contracts.NextPlayerFinder;
 import kalah.Contracts.SeedManipulation.Incrementable;
 import kalah.Contracts.SeedSower;
+import kalah.Model.House;
 import kalah.Model.SeedStorage;
 
 import java.util.ArrayList;
@@ -18,12 +19,14 @@ public class CounterClockwiseSeedSower implements SeedSower {
     }
 
     @Override
-    public SeedStorage sowSeeds(int numberOfSeeds, Board board, int player, int startingIndex) {
+    public SeedStorage sowSeeds(Board board, House house) {
         if (board == null) throw new NullPointerException("Board can't be null");
-        if (player <= 0) throw new IllegalArgumentException(String.format("Player index is less than 1, found %d", player));
 
-        List<Incrementable> seedContainers = getPlayersContainers(board, player);
-        return recurse(numberOfSeeds, board, seedContainers, player, startingIndex, null);
+        int numberOfSeeds = house.getSeeds();
+        house.decrement(house.getSeeds());
+
+        List<Incrementable> seedContainers = getPlayersContainers(board, house.getPlayer());
+        return recurse(numberOfSeeds, board, seedContainers, house.getPlayer(), house.getIndex() + 1, house);
     }
 
     private SeedStorage recurse(int seedsLeft, Board board, List<Incrementable> seedContainers, int player, int containerIndex, Incrementable currentTerminal) {

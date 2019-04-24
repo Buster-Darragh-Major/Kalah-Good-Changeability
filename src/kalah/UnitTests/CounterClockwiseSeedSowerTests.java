@@ -28,7 +28,9 @@ public class CounterClockwiseSeedSowerTests {
 
     @Test
     public void testSingleSeedSow() {
-        House terminalHouse = (House) _seedSower.sowSeeds(1, _board, 1, 1);
+        House startingHouse = _board.getHousesForPlayer(1).get(0);
+        startingHouse.increment(1);
+        House terminalHouse = (House) _seedSower.sowSeeds(_board, startingHouse);
 
         Assert.assertEquals(1, terminalHouse.getIndex());
         Assert.assertEquals(1, terminalHouse.getPlayer());
@@ -37,7 +39,9 @@ public class CounterClockwiseSeedSowerTests {
 
     @Test
     public void testSinglePlayerSow() {
-        House terminalHouse = (House) _seedSower.sowSeeds(5, _board, 1, 1);
+        House startingHouse = _board.getHousesForPlayer(1).get(0);
+        startingHouse.increment(5);
+        House terminalHouse = (House) _seedSower.sowSeeds(_board, startingHouse);
 
         Assert.assertEquals(5, terminalHouse.getIndex());
         Assert.assertEquals(1, terminalHouse.getPlayer());
@@ -50,7 +54,9 @@ public class CounterClockwiseSeedSowerTests {
 
     @Test
     public void testTwoPlayerSow() {
-        House terminalHouse = (House) _seedSower.sowSeeds(10, _board, 1, 1);
+        House startingHouse = _board.getHousesForPlayer(1).get(0);
+        startingHouse.increment(10);
+        House terminalHouse = (House) _seedSower.sowSeeds(_board, startingHouse);
 
         Assert.assertEquals(3, terminalHouse.getIndex());
         Assert.assertEquals(2, terminalHouse.getPlayer());
@@ -68,7 +74,9 @@ public class CounterClockwiseSeedSowerTests {
 
     @Test
     public void testThreePlayerSow() {
-        Store terminalStore = (Store) _seedSower.sowSeeds(20, _board, 1, 1);
+        House startingHouse = _board.getHousesForPlayer(1).get(0);
+        startingHouse.increment(20);
+        Store terminalStore = (Store) _seedSower.sowSeeds(_board, startingHouse);
 
         Assert.assertEquals(0, terminalStore.getIndex());
         Assert.assertEquals(1, terminalStore.getPlayer());

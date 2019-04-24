@@ -31,10 +31,7 @@ public class VanillaKalahRules implements KalahRules {
             throw new EmptyHouseException(String.format("House %d for player %d is empty", houseIndex, player));
         }
 
-        int seedsToDisperse = house.getSeeds();
-        house.decrement(house.getSeeds());
-
-        SeedStorage terminalSeedStorer = _seedSower.sowSeeds(seedsToDisperse, board, player, houseListIndex);
+        SeedStorage terminalSeedStorer = _seedSower.sowSeeds(board, house);
         if ((terminalSeedStorer instanceof House) && (isACapture((House) terminalSeedStorer, player, board))) {
             doCapture((House) terminalSeedStorer, board);
         } else if ((terminalSeedStorer instanceof Store) && (terminalSeedStorer.getPlayer() == player)) {
