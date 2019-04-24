@@ -1,6 +1,5 @@
 package kalah.Model;
 
-import java.util.Collection;
 import java.util.List;
 
 public class Player {

@@ -16,5 +16,5 @@ public interface SeedSower {
      * @param startingIndex
      * @return
      */
-    SeedStorage sowSeedsAmongContainers(int numberOfSeeds, Board board, int player, int startingIndex);
+    SeedStorage sowSeeds(int numberOfSeeds, Board board, int player, int startingIndex);
 }

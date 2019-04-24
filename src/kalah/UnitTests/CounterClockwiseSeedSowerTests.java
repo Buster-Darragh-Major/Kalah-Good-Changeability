@@ -1,6 +1,7 @@
-import kalah.Engine.CounterClockwiseSeedSower;
 import kalah.Contracts.Board;
 import kalah.Contracts.SeedSower;
+import kalah.Engine.CounterClockwiseSeedSower;
+import kalah.Engine.VanillaNextPlayerFinder;
 import kalah.Model.HashMapBoard;
 import kalah.Model.House;
 import kalah.Model.Store;
@@ -22,12 +23,12 @@ public class CounterClockwiseSeedSowerTests {
                 .seedsPerStore(0)
                 .storesPerPlayer(1)
                 .build();
-        _seedSower = new CounterClockwiseSeedSower();
+        _seedSower = new CounterClockwiseSeedSower(new VanillaNextPlayerFinder());
     }
 
     @Test
     public void testSingleSeedSow() {
-        House terminalHouse = (House) _seedSower.sowSeedsAmongContainers(1, _board, 1, 1);
+        House terminalHouse = (House) _seedSower.sowSeeds(1, _board, 1, 1);
 
         Assert.assertEquals(1, terminalHouse.getIndex());
         Assert.assertEquals(1, terminalHouse.getPlayer());
@@ -36,7 +37,7 @@ public class CounterClockwiseSeedSowerTests {
 
     @Test
     public void testSinglePlayerSow() {
-        House terminalHouse = (House) _seedSower.sowSeedsAmongContainers(5, _board, 1, 1);
+        House terminalHouse = (House) _seedSower.sowSeeds(5, _board, 1, 1);
 
         Assert.assertEquals(5, terminalHouse.getIndex());
         Assert.assertEquals(1, terminalHouse.getPlayer());
@@ -49,7 +50,7 @@ public class CounterClockwiseSeedSowerTests {
 
     @Test
     public void testTwoPlayerSow() {
-        House terminalHouse = (House) _seedSower.sowSeedsAmongContainers(10, _board, 1, 1);
+        House terminalHouse = (House) _seedSower.sowSeeds(10, _board, 1, 1);
 
         Assert.assertEquals(3, terminalHouse.getIndex());
         Assert.assertEquals(2, terminalHouse.getPlayer());
@@ -67,7 +68,7 @@ public class CounterClockwiseSeedSowerTests {
 
     @Test
     public void testThreePlayerSow() {
-        Store terminalStore = (Store) _seedSower.sowSeedsAmongContainers(20, _board, 1, 1);
+        Store terminalStore = (Store) _seedSower.sowSeeds(20, _board, 1, 1);
 
         Assert.assertEquals(0, terminalStore.getIndex());
         Assert.assertEquals(1, terminalStore.getPlayer());
