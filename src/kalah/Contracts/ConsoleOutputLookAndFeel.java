@@ -13,4 +13,6 @@ public interface ConsoleOutputLookAndFeel {
     String houseLabel(int houseNo, int noOfSeeds);
 
     String storeLabel(int noOfSeeds);
+
+    String whitespace();
 }

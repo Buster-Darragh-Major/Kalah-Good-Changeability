@@ -33,11 +33,11 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
         Store player2Store = board.getStoresForPlayer(PLAYER_2_INDEX).iterator().next();
 
         return new StringBuilder()
-                .append(synthesizeLine1And5(player2Houses.size()))
+                .append(synthesizeLine1And5(player1Houses.size()))
                 .append(NEW_LINE)
                 // TODO: line 2
                 .append(NEW_LINE)
-                // TODO: line 3
+                .append(synthesizeLine3(player1Houses.size()))
                 .append(NEW_LINE)
                 // TODO: line 4
                 .append(NEW_LINE)
@@ -58,6 +58,27 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
         sb.append(_lookAndFeel.cellCorner())
                 .append(repeat(_lookAndFeel.cellRoof(), STORE_WIDTH))
                 .append(_lookAndFeel.cellCorner());
+
+        return sb.toString();
+    }
+
+    private String synthesizeLine3(int numberOfHouses) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(_lookAndFeel.cellWall())
+                .append(repeat(_lookAndFeel.whitespace(), STORE_WIDTH));
+
+        for (int i = 0; i < numberOfHouses; i++) {
+            if (i == 0) { // If its the first house add a wall on the left instead
+                sb.append(_lookAndFeel.cellWall());
+            } else {
+                sb.append(_lookAndFeel.cellCorner());
+            }
+            sb.append(repeat(_lookAndFeel.cellRoof(), HOUSE_WIDTH));
+        }
+
+        sb.append(_lookAndFeel.cellWall())
+                .append(repeat(_lookAndFeel.whitespace(), STORE_WIDTH))
+                .append(_lookAndFeel.cellWall());
 
         return sb.toString();
     }

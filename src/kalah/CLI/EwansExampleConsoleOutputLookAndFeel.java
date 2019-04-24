@@ -10,6 +10,7 @@ public class EwansExampleConsoleOutputLookAndFeel implements ConsoleOutputLookAn
     private static final String PLAYER_PREFIX = "P";
     private static final String HOUSE_OPEN_BRACE = "[";
     private static final String HOUSE_CLOSED_BRACE = "]";
+    private static final String WHITESPACE = " ";
 
     @Override
     public String cellCorner() {
@@ -50,5 +51,10 @@ public class EwansExampleConsoleOutputLookAndFeel implements ConsoleOutputLookAn
         return new StringBuilder()
                 .append(noOfSeeds)
                 .toString();
+    }
+
+    @Override
+    public String whitespace() {
+        return WHITESPACE;
     }
 }
