@@ -15,6 +15,6 @@ public class Store extends SeedStorage implements Incrementable {
 
     @Override
     public void increment(int numToIncrement) {
-        _noSeeds -= numToIncrement;
+        _noSeeds += numToIncrement;
     }
 }

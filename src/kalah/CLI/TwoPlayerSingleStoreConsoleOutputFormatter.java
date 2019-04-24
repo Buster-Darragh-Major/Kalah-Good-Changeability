@@ -6,8 +6,6 @@ import kalah.Contracts.OutputFormatter;
 import kalah.Model.House;
 import kalah.Model.Store;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatter {
@@ -41,7 +39,7 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
                 .append(NEW_LINE)
                 .append(synthesizeLine3(player1Houses.size()))
                 .append(NEW_LINE)
-                // TODO: line 4
+                .append(synthesizeLine4(PLAYER_1_INDEX, player1Houses, player2Store))
                 .append(NEW_LINE)
                 .append(synthesizeLine1And5(player1Houses.size()))
                 .toString();
@@ -104,6 +102,30 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
 
         sb.append(_lookAndFeel.cellWall())
                 .append(repeat(_lookAndFeel.whitespace(), STORE_WIDTH))
+                .append(_lookAndFeel.cellWall());
+
+        return sb.toString();
+    }
+
+    private String synthesizeLine4(int playerNumber, List<House> houses, Store playerStore) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(_lookAndFeel.cellWall())
+                .append(_lookAndFeel.whitespace())
+                .append(_lookAndFeel.storeLabel(playerStore.getSeeds()))
+                .append(_lookAndFeel.whitespace());
+
+        int houseIndex = 1;
+        for (House house : houses) {
+            sb.append(_lookAndFeel.cellWall())
+                    .append(_lookAndFeel.whitespace())
+                    .append(_lookAndFeel.houseLabel(houseIndex++, house.getSeeds()))
+                    .append(_lookAndFeel.whitespace());
+        }
+
+        sb.append(_lookAndFeel.cellWall())
+                .append(_lookAndFeel.whitespace())
+                .append(_lookAndFeel.playerLabel(playerNumber))
+                .append(_lookAndFeel.whitespace())
                 .append(_lookAndFeel.cellWall());
 
         return sb.toString();
