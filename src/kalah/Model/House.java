@@ -5,8 +5,8 @@ import kalah.Contracts.SeedManipulation.Incrementable;
 
 public class House extends SeedStorage implements Incrementable, Decrementable {
 
-    public House(int noSeeds) {
-        super(noSeeds);
+    public House (int player, int index, int noSeeds) {
+        super(player, index, noSeeds);
     }
 
     @Override

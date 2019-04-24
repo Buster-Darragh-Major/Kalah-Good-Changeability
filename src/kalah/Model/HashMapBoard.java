@@ -62,18 +62,17 @@ public class HashMapBoard implements Board {
 
         public Board build() {
             HashMap<Integer, Player> players = new HashMap<>();
-            for (int i = 0; i < _numberOfPlayers; i++) {
+            for (int playerNum = 1; playerNum <= _numberOfPlayers; playerNum++) {
                 List<House> houses = new ArrayList<>();
-                for (int j = 0; j < _housesPerPlayer; j++) {
-                    houses.add(new House(_seedsPerHouse));
+                for (int houseIndex = 0; houseIndex < _housesPerPlayer; houseIndex++) {
+                    houses.add(new House(playerNum, houseIndex, _seedsPerHouse));
                 }
                 List<Store> stores = new ArrayList<>();
-                for (int j = 0; j < _storesPerPlayer; j++) {
-                    stores.add(new Store(_seedsPerStore));
+                for (int storeIndex = 0; storeIndex < _storesPerPlayer; storeIndex++) {
+                    stores.add(new Store(playerNum, storeIndex, _seedsPerStore));
                 }
 
-                // Player numbers start from 1
-                players.put(i + 1, new Player(houses, stores));
+                players.put(playerNum, new Player(houses, stores));
             }
 
             return new HashMapBoard(players);

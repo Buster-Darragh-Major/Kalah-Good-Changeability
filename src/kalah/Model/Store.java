@@ -4,8 +4,8 @@ import kalah.Contracts.SeedManipulation.Incrementable;
 
 public class Store extends SeedStorage implements Incrementable {
 
-    public Store (int noSeeds) {
-        super(noSeeds);
+    public Store (int player, int index, int noSeeds) {
+        super(player, index, noSeeds);
     }
 
     @Override
