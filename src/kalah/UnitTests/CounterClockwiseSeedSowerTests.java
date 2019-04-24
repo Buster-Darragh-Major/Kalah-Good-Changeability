@@ -73,9 +73,33 @@ public class CounterClockwiseSeedSowerTests {
     }
 
     @Test
-    public void testThreePlayerSow() {
+    public void testSkipOtherPlayersStore() {
         House startingHouse = _board.getHousesForPlayer(1).get(0);
         startingHouse.increment(20);
+        House terminalHouse = (House) _seedSower.sowSeeds(_board, startingHouse);
+
+        Assert.assertEquals(0, terminalHouse.getIndex());
+        Assert.assertEquals(2, terminalHouse.getPlayer());
+        Assert.assertEquals(1, _board.getHousesForPlayer(1).get(0).getSeeds());
+        Assert.assertEquals(2, _board.getHousesForPlayer(1).get(1).getSeeds());
+        Assert.assertEquals(2, _board.getHousesForPlayer(1).get(2).getSeeds());
+        Assert.assertEquals(2, _board.getHousesForPlayer(1).get(3).getSeeds());
+        Assert.assertEquals(2, _board.getHousesForPlayer(1).get(4).getSeeds());
+        Assert.assertEquals(2, _board.getHousesForPlayer(1).get(5).getSeeds());
+        Assert.assertEquals(2, _board.getStoresForPlayer(1).get(0).getSeeds());
+        Assert.assertEquals(2, _board.getHousesForPlayer(2).get(0).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(2).get(1).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(2).get(2).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(2).get(3).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(2).get(4).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(2).get(5).getSeeds());
+        Assert.assertEquals(0, _board.getStoresForPlayer(2).get(0).getSeeds());
+    }
+
+    @Test
+    public void testEndOnOnStore() {
+        House startingHouse = _board.getHousesForPlayer(1).get(0);
+        startingHouse.increment(19);
         Store terminalStore = (Store) _seedSower.sowSeeds(_board, startingHouse);
 
         Assert.assertEquals(0, terminalStore.getIndex());
@@ -93,6 +117,30 @@ public class CounterClockwiseSeedSowerTests {
         Assert.assertEquals(1, _board.getHousesForPlayer(2).get(3).getSeeds());
         Assert.assertEquals(1, _board.getHousesForPlayer(2).get(4).getSeeds());
         Assert.assertEquals(1, _board.getHousesForPlayer(2).get(5).getSeeds());
-        Assert.assertEquals(1, _board.getStoresForPlayer(2).get(0).getSeeds());
+        Assert.assertEquals(0, _board.getStoresForPlayer(2).get(0).getSeeds());
+    }
+
+    @Test
+    public void testEndOnOtherPlayersStore() {
+        House startingHouse = _board.getHousesForPlayer(1).get(0);
+        startingHouse.increment(13);
+        House terminalHouse = (House) _seedSower.sowSeeds(_board, startingHouse);
+
+        Assert.assertEquals(0, terminalHouse.getIndex());
+        Assert.assertEquals(1, terminalHouse.getPlayer());
+        Assert.assertEquals(1, _board.getHousesForPlayer(1).get(0).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(1).get(1).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(1).get(2).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(1).get(3).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(1).get(4).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(1).get(5).getSeeds());
+        Assert.assertEquals(1, _board.getStoresForPlayer(1).get(0).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(2).get(0).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(2).get(1).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(2).get(2).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(2).get(3).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(2).get(4).getSeeds());
+        Assert.assertEquals(1, _board.getHousesForPlayer(2).get(5).getSeeds());
+        Assert.assertEquals(0, _board.getStoresForPlayer(2).get(0).getSeeds());
     }
 }

@@ -6,6 +6,7 @@ import kalah.Contracts.SeedManipulation.Incrementable;
 import kalah.Contracts.SeedSower;
 import kalah.Model.House;
 import kalah.Model.SeedStorage;
+import kalah.Model.Store;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,21 +27,27 @@ public class CounterClockwiseSeedSower implements SeedSower {
         house.decrement(house.getSeeds());
 
         List<Incrementable> seedContainers = getPlayersContainers(board, house.getPlayer());
-        return recurse(numberOfSeeds, board, seedContainers, house.getPlayer(), house.getIndex() + 1, house);
+        return recurse(house.getPlayer(), numberOfSeeds, board, seedContainers, house.getPlayer(), house.getIndex() + 1, house);
     }
 
-    private SeedStorage recurse(int seedsLeft, Board board, List<Incrementable> seedContainers, int player, int containerIndex, Incrementable currentTerminal) {
+    private SeedStorage recurse(int originalPlayer, int seedsLeft, Board board, List<Incrementable> seedContainers, int player, int containerIndex, Incrementable currentTerminal) {
         while (seedsLeft > 0) {
-            seedContainers.get(containerIndex).increment();
-            currentTerminal = seedContainers.get(containerIndex);
-            seedsLeft--;
+            if (!isOpponentsStore(seedContainers.get(containerIndex), originalPlayer)) {
+                seedContainers.get(containerIndex).increment();
+                currentTerminal = seedContainers.get(containerIndex);
+                seedsLeft--;
+            }
             if (++containerIndex >= seedContainers.size()) {
                 player = _nextPlayerFinder.findNextPlayer(board, player);
                 List<Incrementable> nextPlayersContainers = getPlayersContainers(board, player);
-                return recurse(seedsLeft, board, nextPlayersContainers, player, 0, currentTerminal);
+                return recurse(originalPlayer, seedsLeft, board, nextPlayersContainers, player, 0, currentTerminal);
             }
         }
         return (SeedStorage) currentTerminal;
+    }
+
+    private boolean isOpponentsStore(Incrementable incrementable, int originalPlayer) {
+        return incrementable instanceof Store && ((SeedStorage) incrementable).getPlayer() != originalPlayer;
     }
 
     private List<Incrementable> getPlayersContainers(Board board, int player) {
