@@ -26,7 +26,7 @@ public class VanillaKalahRules implements KalahRules {
         int houseListIndex = houseIndex - 1; // Convert UI index to list index
 
         List<House> playersHouses = board.getHousesForPlayer(player);
-        if (houseListIndex > playersHouses.size()) {
+        if (houseListIndex >= playersHouses.size()) {
             throw new HouseDoesntExistException(String.format("House %d does not exist", houseIndex));
         }
         House house = playersHouses.get(houseListIndex);

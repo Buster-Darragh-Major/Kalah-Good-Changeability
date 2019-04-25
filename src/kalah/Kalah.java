@@ -19,44 +19,52 @@ import kalah.Model.HashMapBoard;
  */
 public class Kalah {
 
+	private Board _board;
+	private OutputFormatter _outputFormatter;
+	private KalahRules _kalahRules;
+
 	public static void main(String[] args) {
 		new Kalah().play(new MockIO());
 	}
 
 	public void play(IO io) {
-		Board board = new HashMapBoard.Builder()
+		bootstrap();
+
+		int playersTurn = 1;
+		while (!_kalahRules.isGameOver(_board, playersTurn)) {
+			String[] outputLines = _outputFormatter.splitLines(_outputFormatter.formatOutput(_board));
+			for (String line : outputLines) {
+				io.println(line);
+			}
+
+			String userInput= io.readFromKeyboard(_outputFormatter.turnPrompt(playersTurn));
+			if (userInput.equals("q")) break;
+
+			try {
+				playersTurn = _kalahRules.doTurn(_board, playersTurn, Integer.parseInt(userInput));
+			} catch (EmptyHouseException e) {
+				io.println(_outputFormatter.emptyHousePrompt(Integer.parseInt(userInput)));
+			} catch (NumberFormatException | HouseDoesntExistException e) {
+				io.println(_outputFormatter.invalidInputPrompt());
+			}
+		}
+
+		io.println(_outputFormatter.gameOverPrompt());
+	}
+
+	private void bootstrap() {
+		_board = new HashMapBoard.Builder()
 				.housesPerPlayer(6)
 				.storesPerPlayer(1)
 				.numberOfPlayers(2)
 				.seedsPerHouse(4)
 				.seedsPerStore(0)
 				.build();
-		OutputFormatter outputFormatter = new TwoPlayerSingleStoreConsoleOutputFormatter(
+		_outputFormatter = new TwoPlayerSingleStoreConsoleOutputFormatter(
 				new EwansExampleConsoleOutputLookAndFeel());
 		NextPlayerFinder nextPlayerFinder = new VanillaNextPlayerFinder();
 		SeedSower seedSower = new CounterClockwiseSeedSower(nextPlayerFinder);
 		OppositeHouseFinder oppositeHouseFinder = new VanillaOppositeHouseFinder();
-		KalahRules kalahRules = new VanillaKalahRules(seedSower, nextPlayerFinder, oppositeHouseFinder);
-
-		int playersTurn = 1;
-		while (!kalahRules.isGameOver(board, playersTurn)) {
-			String[] outputLines = outputFormatter.splitLines(outputFormatter.formatOutput(board));
-			for (String line : outputLines) {
-				io.println(line);
-			}
-
-			String userInput= io.readFromKeyboard(outputFormatter.turnPrompt(playersTurn));
-			if (userInput.equals("q")) break;
-
-			try {
-				playersTurn = kalahRules.doTurn(board, playersTurn, Integer.parseInt(userInput));
-			} catch (EmptyHouseException e) {
-				io.println(outputFormatter.emptyHousePrompt(Integer.parseInt(userInput)));
-			} catch (NumberFormatException | HouseDoesntExistException e) {
-				io.println(outputFormatter.invalidInputPrompt());
-			}
-		}
-
-		io.println(outputFormatter.gameOverPrompt());
+		_kalahRules = new VanillaKalahRules(seedSower, nextPlayerFinder, oppositeHouseFinder);
 	}
 }
