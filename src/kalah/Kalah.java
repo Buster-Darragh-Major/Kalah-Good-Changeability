@@ -9,6 +9,8 @@ import kalah.Engine.CounterClockwiseSeedSower;
 import kalah.Engine.VanillaKalahRules;
 import kalah.Engine.VanillaNextPlayerFinder;
 import kalah.Engine.VanillaOppositeHouseFinder;
+import kalah.Exceptions.EmptyHouseException;
+import kalah.Exceptions.HouseDoesntExistException;
 import kalah.Model.HashMapBoard;
 
 /**
@@ -22,13 +24,6 @@ public class Kalah {
 	}
 
 	public void play(IO io) {
-//		// Replace what's below with your implementation
-//		io.println("+----+-------+-------+-------+-------+-------+-------+----+");
-//		io.println("| P2 | 6[ 4] | 5[ 4] | 4[ 4] | 3[ 4] | 2[ 4] | 1[ 4] |  0 |");
-//		io.println("|    |-------+-------+-------+-------+-------+-------|    |");
-//		io.println("|  0 | 1[ 4] | 2[ 4] | 3[ 4] | 4[ 4] | 5[ 4] | 6[ 4] | P1 |");
-//		io.println("+----+-------+-------+-------+-------+-------+-------+----+");
-//		io.println("Player 1's turn - Specify house number or 'q' to quit: ");
 		Board board = new HashMapBoard.Builder()
 				.housesPerPlayer(6)
 				.storesPerPlayer(1)
@@ -45,15 +40,23 @@ public class Kalah {
 
 		int playersTurn = 1;
 		while (!kalahRules.isGameOver(board, playersTurn)) {
-			String[] outputLines = outputFormatter.formatOutput(board).split("\n");
+			String[] outputLines = outputFormatter.splitLines(outputFormatter.formatOutput(board));
 			for (String line : outputLines) {
 				io.println(line);
 			}
 
-			int houseIndex = Integer.parseInt(io.readFromKeyboard(String.format("Player %d's turn - Specify house number or 'q' to quit: ", playersTurn)));
-			playersTurn = kalahRules.doTurn(board, playersTurn, houseIndex);
+			String userInput= io.readFromKeyboard(outputFormatter.turnPrompt(playersTurn));
+			if (userInput.equals("q")) break;
+
+			try {
+				playersTurn = kalahRules.doTurn(board, playersTurn, Integer.parseInt(userInput));
+			} catch (EmptyHouseException e) {
+				io.println(outputFormatter.emptyHousePrompt(Integer.parseInt(userInput)));
+			} catch (NumberFormatException | HouseDoesntExistException e) {
+				io.println(outputFormatter.invalidInputPrompt());
+			}
 		}
 
-
+		io.println(outputFormatter.gameOverPrompt());
 	}
 }

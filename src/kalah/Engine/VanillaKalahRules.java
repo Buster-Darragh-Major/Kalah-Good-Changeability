@@ -2,6 +2,7 @@ package kalah.Engine;
 
 import kalah.Contracts.*;
 import kalah.Exceptions.EmptyHouseException;
+import kalah.Exceptions.HouseDoesntExistException;
 import kalah.Model.House;
 import kalah.Model.SeedStorage;
 import kalah.Model.Store;
@@ -25,11 +26,15 @@ public class VanillaKalahRules implements KalahRules {
         int houseListIndex = houseIndex - 1; // Convert UI index to list index
 
         List<House> playersHouses = board.getHousesForPlayer(player);
+        if (houseListIndex > playersHouses.size()) {
+            throw new HouseDoesntExistException(String.format("House %d does not exist", houseIndex));
+        }
         House house = playersHouses.get(houseListIndex);
 
         if (!(house.getSeeds() > 0)) {
             throw new EmptyHouseException(String.format("House %d for player %d is empty", houseIndex, player));
         }
+
 
         SeedStorage terminalSeedStorer = _seedSower.sowSeeds(board, house);
         if ((terminalSeedStorer instanceof House) && (isACapture((House) terminalSeedStorer, player, board))) {

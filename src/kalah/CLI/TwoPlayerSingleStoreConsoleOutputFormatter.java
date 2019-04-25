@@ -26,7 +26,6 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
 
     @Override
     public String formatOutput(Board board) {
-        // Unpack
         List<House> player1Houses = board.getHousesForPlayer(PLAYER_1_INDEX);
         List<House> player2Houses = board.getHousesForPlayer(PLAYER_2_INDEX);
         Store player1Store = board.getStoresForPlayer(PLAYER_1_INDEX).iterator().next();
@@ -43,6 +42,31 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
                 .append(NEW_LINE)
                 .append(synthesizeLine1And5(player1Houses.size()))
                 .toString();
+    }
+
+    @Override
+    public String[] splitLines(String string) {
+        return string.split("\n");
+    }
+
+    @Override
+    public String turnPrompt(int playerTurn) {
+        return String.format("Player %d's turn - Specify house number or 'q' to quit: ", playerTurn);
+    }
+
+    @Override
+    public String emptyHousePrompt(int houseNo) {
+        return String.format("You cannot sow seeds from house %d as it is empty", houseNo);
+    }
+
+    @Override
+    public String invalidInputPrompt() {
+        return "Invalid input";
+    }
+
+    @Override
+    public String gameOverPrompt() {
+        return "Game over";
     }
 
     private String synthesizeLine1And5(int numberOfHouses) {
