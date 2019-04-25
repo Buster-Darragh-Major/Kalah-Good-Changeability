@@ -41,6 +41,11 @@ public class VanillaKalahRules implements KalahRules {
         return _nextPlayerFinder.findNextPlayer(board, player);
     }
 
+    @Override
+    public boolean isGameOver(Board board, int player) {
+        return false; // TODO:
+    }
+
     private boolean isACapture(House house, int player, Board board) {
         return house.getPlayer() == player
                 && house.getSeeds() == 1 // If it's 1 then it would have been 0 before the turn
@@ -56,5 +61,6 @@ public class VanillaKalahRules implements KalahRules {
                 board, house, _nextPlayerFinder.findNextPlayer(board, house.getPlayer()));
         seedsToCapture += oppositeHouse.getSeeds();
         oppositeHouse.decrement(oppositeHouse.getSeeds());
+        (board.getStoresForPlayer(house.getPlayer()).get(0)).increment(seedsToCapture);
     }
 }
