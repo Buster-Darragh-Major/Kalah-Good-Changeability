@@ -43,7 +43,12 @@ public class VanillaKalahRules implements KalahRules {
 
     @Override
     public boolean isGameOver(Board board, int player) {
-        return false; // TODO:
+        for (House house : board.getHousesForPlayer(player)) {
+            if (house.getSeeds() > 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean isACapture(House house, int player, Board board) {
