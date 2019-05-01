@@ -1,4 +1,4 @@
-package kalah.CLI;
+package kalah.Rendering;
 
 import kalah.Contracts.Model.Board;
 import kalah.Contracts.Rendering.ConsoleOutputLookAndFeel;

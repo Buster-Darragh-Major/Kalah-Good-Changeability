@@ -2,8 +2,8 @@ package kalah;
 
 import com.qualitascorpus.testsupport.IO;
 import com.qualitascorpus.testsupport.MockIO;
-import kalah.CLI.EwansExampleConsoleOutputLookAndFeel;
-import kalah.CLI.TwoPlayerSingleStoreConsoleOutputFormatter;
+import kalah.Rendering.EwansExampleConsoleOutputLookAndFeel;
+import kalah.Rendering.TwoPlayerSingleStoreConsoleOutputFormatter;
 import kalah.Contracts.Model.Board;
 import kalah.Contracts.Rendering.OutputFormatter;
 import kalah.Contracts.Rules.KalahRules;
