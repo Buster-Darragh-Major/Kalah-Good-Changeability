@@ -1,9 +1,9 @@
-package kalah.Engine;
+package kalah.Rules;
 
-import kalah.Contracts.Board;
-import kalah.Contracts.NextPlayerFinder;
-import kalah.Contracts.SeedManipulation.Incrementable;
-import kalah.Contracts.SeedSower;
+import kalah.Contracts.Model.Board;
+import kalah.Contracts.Rules.NextPlayerFinder;
+import kalah.Contracts.Model.SeedManipulation.Incrementable;
+import kalah.Contracts.Rules.SeedSower;
 import kalah.Model.House;
 import kalah.Model.SeedStorage;
 import kalah.Model.Store;

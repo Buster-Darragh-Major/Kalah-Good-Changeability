@@ -1,7 +1,7 @@
 package kalah.Model;
 
-import kalah.Contracts.SeedManipulation.Decrementable;
-import kalah.Contracts.SeedManipulation.Incrementable;
+import kalah.Contracts.Model.SeedManipulation.Decrementable;
+import kalah.Contracts.Model.SeedManipulation.Incrementable;
 
 public class House extends SeedStorage implements Incrementable, Decrementable {
 

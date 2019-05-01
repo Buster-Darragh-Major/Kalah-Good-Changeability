@@ -1,4 +1,4 @@
-package kalah.Contracts;
+package kalah.Contracts.Rendering;
 
 public interface ConsoleOutputLookAndFeel {
 

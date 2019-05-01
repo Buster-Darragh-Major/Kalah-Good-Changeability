@@ -1,6 +1,10 @@
-package kalah.Engine;
+package kalah.Rules;
 
-import kalah.Contracts.*;
+import kalah.Contracts.Model.Board;
+import kalah.Contracts.Rules.KalahRules;
+import kalah.Contracts.Rules.NextPlayerFinder;
+import kalah.Contracts.Rules.OppositeHouseFinder;
+import kalah.Contracts.Rules.SeedSower;
 import kalah.Exceptions.EmptyHouseException;
 import kalah.Exceptions.HouseDoesntExistException;
 import kalah.Model.House;

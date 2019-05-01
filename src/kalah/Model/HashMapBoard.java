@@ -1,6 +1,6 @@
 package kalah.Model;
 
-import kalah.Contracts.Board;
+import kalah.Contracts.Model.Board;
 
 import java.util.*;
 

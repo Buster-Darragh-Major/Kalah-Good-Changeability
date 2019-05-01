@@ -1,4 +1,4 @@
-package kalah.Contracts;
+package kalah.Contracts.Model;
 
 import kalah.Model.House;
 import kalah.Model.Store;

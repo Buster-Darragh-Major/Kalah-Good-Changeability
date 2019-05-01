@@ -1,7 +1,7 @@
-import kalah.Contracts.Board;
-import kalah.Contracts.SeedSower;
-import kalah.Engine.CounterClockwiseSeedSower;
-import kalah.Engine.VanillaNextPlayerFinder;
+import kalah.Contracts.Model.Board;
+import kalah.Contracts.Rules.SeedSower;
+import kalah.Rules.CounterClockwiseSeedSower;
+import kalah.Rules.VanillaNextPlayerFinder;
 import kalah.Model.HashMapBoard;
 import kalah.Model.House;
 import kalah.Model.Store;

@@ -1,6 +1,6 @@
-import kalah.Contracts.Board;
-import kalah.Contracts.OppositeHouseFinder;
-import kalah.Engine.VanillaOppositeHouseFinder;
+import kalah.Contracts.Model.Board;
+import kalah.Contracts.Rules.OppositeHouseFinder;
+import kalah.Rules.VanillaOppositeHouseFinder;
 import kalah.Model.HashMapBoard;
 import kalah.Model.House;
 import org.junit.Assert;

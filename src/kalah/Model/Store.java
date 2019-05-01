@@ -1,6 +1,6 @@
 package kalah.Model;
 
-import kalah.Contracts.SeedManipulation.Incrementable;
+import kalah.Contracts.Model.SeedManipulation.Incrementable;
 
 public class Store extends SeedStorage implements Incrementable {
 

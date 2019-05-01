@@ -1,4 +1,6 @@
-package kalah.Contracts;
+package kalah.Contracts.Rules;
+
+import kalah.Contracts.Model.Board;
 
 public interface KalahRules {
 

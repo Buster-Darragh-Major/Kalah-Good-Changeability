@@ -1,4 +1,6 @@
-package kalah.Contracts;
+package kalah.Contracts.Rendering;
+
+import kalah.Contracts.Model.Board;
 
 public interface OutputFormatter {
 

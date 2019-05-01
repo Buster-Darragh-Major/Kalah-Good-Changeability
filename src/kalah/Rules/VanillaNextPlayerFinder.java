@@ -1,7 +1,7 @@
-package kalah.Engine;
+package kalah.Rules;
 
-import kalah.Contracts.Board;
-import kalah.Contracts.NextPlayerFinder;
+import kalah.Contracts.Model.Board;
+import kalah.Contracts.Rules.NextPlayerFinder;
 
 public class VanillaNextPlayerFinder implements NextPlayerFinder {
 

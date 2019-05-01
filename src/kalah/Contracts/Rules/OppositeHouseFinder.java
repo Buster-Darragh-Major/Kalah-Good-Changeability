@@ -1,5 +1,6 @@
-package kalah.Contracts;
+package kalah.Contracts.Rules;
 
+import kalah.Contracts.Model.Board;
 import kalah.Model.House;
 
 public interface OppositeHouseFinder {

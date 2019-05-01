@@ -1,4 +1,4 @@
-package kalah.Contracts.SeedManipulation;
+package kalah.Contracts.Model.SeedManipulation;
 
 public interface Incrementable {
     void increment();

@@ -1,7 +1,7 @@
-package kalah.Engine;
+package kalah.Rules;
 
-import kalah.Contracts.Board;
-import kalah.Contracts.OppositeHouseFinder;
+import kalah.Contracts.Model.Board;
+import kalah.Contracts.Rules.OppositeHouseFinder;
 import kalah.Model.House;
 
 public class VanillaOppositeHouseFinder implements OppositeHouseFinder {
