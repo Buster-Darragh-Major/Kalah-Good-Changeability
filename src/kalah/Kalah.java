@@ -3,10 +3,12 @@ package kalah;
 import com.qualitascorpus.testsupport.IO;
 import com.qualitascorpus.testsupport.MockIO;
 import kalah.Bootstrap.DefaultBoardFactory;
+import kalah.Bootstrap.DefaultInputInterpreterFactory;
 import kalah.Bootstrap.DefaultKalahRulesFactory;
 import kalah.Bootstrap.DefaultOutputFormatterFactory;
+import kalah.Contracts.IO.InputInterpreter;
+import kalah.Contracts.IO.Rendering.OutputFormatter;
 import kalah.Contracts.Model.Board;
-import kalah.Contracts.Rendering.OutputFormatter;
 import kalah.Contracts.Rules.KalahRules;
 import kalah.Exceptions.EmptyHouseException;
 import kalah.Exceptions.HouseDoesntExistException;
@@ -20,6 +22,7 @@ public class Kalah {
 	private Board _board;
 	private OutputFormatter _outputFormatter;
 	private KalahRules _kalahRules;
+	private InputInterpreter _inputInterpreter;
 
 	public static void main(String[] args) {
 		new Kalah().play(new MockIO());
@@ -36,10 +39,10 @@ public class Kalah {
 			}
 
 			String userInput= io.readFromKeyboard(_outputFormatter.turnPrompt(playersTurn));
-			if (userInput.equals("q")) break;
+			if (_inputInterpreter.isQuit(userInput)) break;
 
 			try {
-				playersTurn = _kalahRules.doTurn(_board, playersTurn, Integer.parseInt(userInput));
+				playersTurn = _kalahRules.doTurn(_board, playersTurn, _inputInterpreter.asNumber(userInput));
 			} catch (EmptyHouseException e) {
 				io.println(_outputFormatter.emptyHousePrompt(Integer.parseInt(userInput)));
 			} catch (NumberFormatException | HouseDoesntExistException e) {
@@ -54,5 +57,6 @@ public class Kalah {
 		_board = new DefaultBoardFactory().createBoard();
 		_outputFormatter = new DefaultOutputFormatterFactory().createOutputFormatter();
 		_kalahRules = new DefaultKalahRulesFactory().createKalahRules();
+		_inputInterpreter = new DefaultInputInterpreterFactory().createInputInterpreter();
 	}
 }

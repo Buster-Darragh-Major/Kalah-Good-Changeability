@@ -1,6 +1,6 @@
-package kalah.Rendering;
+package kalah.IO.Rendering;
 
-import kalah.Contracts.Rendering.ConsoleOutputLookAndFeel;
+import kalah.Contracts.IO.Rendering.ConsoleOutputLookAndFeel;
 
 public class EwansExampleConsoleOutputLookAndFeel implements ConsoleOutputLookAndFeel {
 

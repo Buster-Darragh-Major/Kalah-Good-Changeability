@@ -1,7 +1,7 @@
-import kalah.Rendering.EwansExampleConsoleOutputLookAndFeel;
-import kalah.Rendering.TwoPlayerSingleStoreConsoleOutputFormatter;
+import kalah.IO.Rendering.EwansExampleConsoleOutputLookAndFeel;
+import kalah.IO.Rendering.TwoPlayerSingleStoreConsoleOutputFormatter;
 import kalah.Contracts.Model.Board;
-import kalah.Contracts.Rendering.OutputFormatter;
+import kalah.Contracts.IO.Rendering.OutputFormatter;
 import kalah.Model.HashMapBoard;
 import kalah.Model.House;
 import org.junit.Assert;

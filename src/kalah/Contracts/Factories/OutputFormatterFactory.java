@@ -1,6 +1,6 @@
 package kalah.Contracts.Factories;
 
-import kalah.Contracts.Rendering.OutputFormatter;
+import kalah.Contracts.IO.Rendering.OutputFormatter;
 
 public interface OutputFormatterFactory {
 

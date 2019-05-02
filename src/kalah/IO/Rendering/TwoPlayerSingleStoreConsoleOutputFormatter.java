@@ -1,8 +1,8 @@
-package kalah.Rendering;
+package kalah.IO.Rendering;
 
 import kalah.Contracts.Model.Board;
-import kalah.Contracts.Rendering.ConsoleOutputLookAndFeel;
-import kalah.Contracts.Rendering.OutputFormatter;
+import kalah.Contracts.IO.Rendering.ConsoleOutputLookAndFeel;
+import kalah.Contracts.IO.Rendering.OutputFormatter;
 import kalah.Model.House;
 import kalah.Model.Store;
 

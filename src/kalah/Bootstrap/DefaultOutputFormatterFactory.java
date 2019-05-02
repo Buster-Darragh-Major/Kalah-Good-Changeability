@@ -1,9 +1,9 @@
 package kalah.Bootstrap;
 
 import kalah.Contracts.Factories.OutputFormatterFactory;
-import kalah.Contracts.Rendering.OutputFormatter;
-import kalah.Rendering.EwansExampleConsoleOutputLookAndFeel;
-import kalah.Rendering.TwoPlayerSingleStoreConsoleOutputFormatter;
+import kalah.Contracts.IO.Rendering.OutputFormatter;
+import kalah.IO.Rendering.EwansExampleConsoleOutputLookAndFeel;
+import kalah.IO.Rendering.TwoPlayerSingleStoreConsoleOutputFormatter;
 
 public class DefaultOutputFormatterFactory implements OutputFormatterFactory {
     @Override
