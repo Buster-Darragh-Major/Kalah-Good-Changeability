@@ -12,6 +12,7 @@ import kalah.Contracts.Model.Board;
 import kalah.Contracts.Rules.KalahRules;
 import kalah.Exceptions.EmptyHouseException;
 import kalah.Exceptions.HouseDoesntExistException;
+import kalah.test.TestKalah;
 
 /**
  * This class is the starting point for a Kalah implementation using
@@ -25,6 +26,29 @@ public class Kalah {
 	private InputInterpreter _inputInterpreter;
 
 	public static void main(String[] args) {
+//		TestKalah tk = new TestKalah();
+//		tk.run();
+//		tk.testExactLapCapture();
+//		tk.testCapture();
+//		tk.testQuit();
+//		tk.testSimpleStart();
+//		tk.testP1Continue();
+//		tk.testSimpleTwoMoves();
+//		tk.testSingleWrap();
+//		tk.testContinueWrap();
+//		tk.testCapture();
+//		tk.testEmptyHouseCapture();
+//		tk.testFullGame1();
+//		tk.testFullGame2();
+//		tk.testFullGameStore();
+//		tk.testFullGameEmpty();
+//		tk.testFullGameTie();
+//		tk.testFullGameEmptyHouses();
+//		tk.testUseEmpty();
+//		tk.testWrapped();
+//		tk.testDoubleWrap();
+//		tk.testExactLapCapture();
+//		tk.testExactLapEmptyCapture();
 		new Kalah().play(new MockIO());
 	}
 
@@ -33,10 +57,7 @@ public class Kalah {
 
 		int playersTurn = _kalahRules.startingPlayer();
 		while (!_kalahRules.isGameOver(_board, playersTurn)) {
-			String[] outputLines = _outputFormatter.splitLines(_outputFormatter.formatOutput(_board));
-			for (String line : outputLines) {
-				io.println(line);
-			}
+			printBoard(io);
 
 			String userInput= io.readFromKeyboard(_outputFormatter.turnPrompt(playersTurn));
 			if (_inputInterpreter.isQuit(userInput)) break;
@@ -50,7 +71,18 @@ public class Kalah {
 			}
 		}
 
+		if (_kalahRules.isGameOver(_board, playersTurn)) {
+			printBoard(io);
+		}
+
 		io.println(_outputFormatter.gameOverPrompt());
+	}
+
+	private void printBoard(IO io) {
+		String[] outputLines = _outputFormatter.splitLines(_outputFormatter.formatOutput(_board));
+		for (String line : outputLines) {
+			io.println(line);
+		}
 	}
 
 	private void bootstrap() {

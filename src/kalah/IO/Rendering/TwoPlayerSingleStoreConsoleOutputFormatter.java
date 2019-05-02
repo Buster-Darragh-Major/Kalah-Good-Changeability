@@ -63,12 +63,12 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
 
     @Override
     public String turnPrompt(int playerTurn) {
-        return String.format("Player %d's turn - Specify house number or '%c' to quit: ", QUIT_SYMBOL, playerTurn);
+        return String.format("Player P%d's turn - Specify house number or '%s' to quit: ", playerTurn, QUIT_SYMBOL);
     }
 
     @Override
     public String emptyHousePrompt(int houseNo) {
-        return String.format("You cannot sow seeds from house %d as it is empty", houseNo);
+        return "House is empty. Move again.";
     }
 
     @Override
