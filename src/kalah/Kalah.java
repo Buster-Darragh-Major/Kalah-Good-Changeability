@@ -2,21 +2,14 @@ package kalah;
 
 import com.qualitascorpus.testsupport.IO;
 import com.qualitascorpus.testsupport.MockIO;
-import kalah.Rendering.EwansExampleConsoleOutputLookAndFeel;
-import kalah.Rendering.TwoPlayerSingleStoreConsoleOutputFormatter;
+import kalah.Bootstrap.DefaultBoardFactory;
+import kalah.Bootstrap.DefaultKalahRulesFactory;
+import kalah.Bootstrap.DefaultOutputFormatterFactory;
 import kalah.Contracts.Model.Board;
 import kalah.Contracts.Rendering.OutputFormatter;
 import kalah.Contracts.Rules.KalahRules;
-import kalah.Contracts.Rules.NextPlayerFinder;
-import kalah.Contracts.Rules.OppositeHouseFinder;
-import kalah.Contracts.Rules.SeedSower;
-import kalah.Rules.CounterClockwiseSeedSower;
-import kalah.Rules.VanillaKalahRules;
-import kalah.Rules.VanillaNextPlayerFinder;
-import kalah.Rules.VanillaOppositeHouseFinder;
 import kalah.Exceptions.EmptyHouseException;
 import kalah.Exceptions.HouseDoesntExistException;
-import kalah.Model.HashMapBoard;
 
 /**
  * This class is the starting point for a Kalah implementation using
@@ -58,18 +51,8 @@ public class Kalah {
 	}
 
 	private void bootstrap() {
-		_board = new HashMapBoard.Builder()
-				.housesPerPlayer(6)
-				.storesPerPlayer(1)
-				.numberOfPlayers(2)
-				.seedsPerHouse(4)
-				.seedsPerStore(0)
-				.build();
-		_outputFormatter = new TwoPlayerSingleStoreConsoleOutputFormatter(
-				new EwansExampleConsoleOutputLookAndFeel());
-		NextPlayerFinder nextPlayerFinder = new VanillaNextPlayerFinder();
-		SeedSower seedSower = new CounterClockwiseSeedSower(nextPlayerFinder);
-		OppositeHouseFinder oppositeHouseFinder = new VanillaOppositeHouseFinder();
-		_kalahRules = new VanillaKalahRules(seedSower, nextPlayerFinder, oppositeHouseFinder);
+		_board = new DefaultBoardFactory().createBoard();
+		_outputFormatter = new DefaultOutputFormatterFactory().createOutputFormatter();
+		_kalahRules = new DefaultKalahRulesFactory().createKalahRules();
 	}
 }
