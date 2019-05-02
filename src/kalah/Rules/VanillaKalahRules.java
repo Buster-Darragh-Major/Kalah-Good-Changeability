@@ -16,6 +16,7 @@ import java.util.List;
 public class VanillaKalahRules implements KalahRules {
 
     private static final int STARTING_PLAYER = 1;
+    private static final int HOUSE_CAPTURE_SEED_THRESHOLD = 0;
 
     private SeedSower _seedSower;
     private NextPlayerFinder _nextPlayerFinder;
@@ -86,7 +87,7 @@ public class VanillaKalahRules implements KalahRules {
 
     private boolean isACapture(House house, int player, Board board) {
         return house.getPlayer() == player
-                && house.getSeeds() == 1 // If it's 1 then it would have been 0 before the turn
+                && house.getSeeds() == HOUSE_CAPTURE_SEED_THRESHOLD + 1 // If it's 1 then it would have been 0 before the turn
                 && _oppositeHouseFinder.findOppositeHouse(
                         board, house, _nextPlayerFinder.findNextPlayer(board, player)).getSeeds() != 0;
     }
