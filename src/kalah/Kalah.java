@@ -31,7 +31,7 @@ public class Kalah {
 	public void play(IO io) {
 		bootstrap();
 
-		int playersTurn = 1;
+		int playersTurn = _kalahRules.startingPlayer();
 		while (!_kalahRules.isGameOver(_board, playersTurn)) {
 			String[] outputLines = _outputFormatter.splitLines(_outputFormatter.formatOutput(_board));
 			for (String line : outputLines) {

@@ -15,6 +15,8 @@ import java.util.List;
 
 public class VanillaKalahRules implements KalahRules {
 
+    private static final int STARTING_PLAYER = 1;
+
     private SeedSower _seedSower;
     private NextPlayerFinder _nextPlayerFinder;
     private OppositeHouseFinder _oppositeHouseFinder;
@@ -58,6 +60,11 @@ public class VanillaKalahRules implements KalahRules {
             }
         }
         return true;
+    }
+
+    @Override
+    public int startingPlayer() {
+        return STARTING_PLAYER;
     }
 
     private boolean isACapture(House house, int player, Board board) {

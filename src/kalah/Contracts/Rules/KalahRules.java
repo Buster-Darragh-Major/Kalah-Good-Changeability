@@ -15,4 +15,6 @@ public interface KalahRules {
     int doTurn(Board board, int player, int houseIndex);
 
     boolean isGameOver(Board board, int player);
+
+    int startingPlayer();
 }
