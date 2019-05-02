@@ -1,5 +1,6 @@
 package kalah.IO.Rendering;
 
+import kalah.Contracts.IO.InputInterpreter;
 import kalah.Contracts.Model.Board;
 import kalah.Contracts.IO.Rendering.ConsoleOutputLookAndFeel;
 import kalah.Contracts.IO.Rendering.OutputFormatter;
@@ -14,6 +15,7 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
     private static final int PLAYER_2_INDEX = 2;
 
     private static final String NEW_LINE = "\n";
+    private static final String QUIT_SYMBOL = "q";
 
     private static final int STORE_WIDTH = 4;
     private static final int HOUSE_WIDTH = 7;
@@ -24,6 +26,16 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
         _lookAndFeel = lookAndFeel;
     }
 
+    /**
+     * Formats output in the form:
+     * +----+-------+-------+-------+-------+-------+-------+----+
+     * | P2 | 6[ 1] | 5[ 0] | 4[ 0] | 3[ 0] | 2[ 0] | 1[ 0] | 13 |
+     * |    |-------+-------+-------+-------+-------+-------|    |
+     * | 11 | 1[ 0] | 2[ 0] | 3[ 0] | 4[15] | 5[ 8] | 6[ 0] | P1 |
+     * +----+-------+-------+-------+-------+-------+-------+----+
+     * @param board
+     * @return formatted output
+     */
     @Override
     public String formatOutput(Board board) {
         List<House> player1Houses = board.getHousesForPlayer(PLAYER_1_INDEX);
@@ -51,7 +63,7 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
 
     @Override
     public String turnPrompt(int playerTurn) {
-        return String.format("Player %d's turn - Specify house number or 'q' to quit: ", playerTurn);
+        return String.format("Player %d's turn - Specify house number or '%c' to quit: ", QUIT_SYMBOL, playerTurn);
     }
 
     @Override
