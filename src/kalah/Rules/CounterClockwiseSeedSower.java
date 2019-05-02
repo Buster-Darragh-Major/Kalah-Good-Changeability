@@ -19,6 +19,13 @@ public class CounterClockwiseSeedSower implements SeedSower {
         _nextPlayerFinder = nextPlayerFinder;
     }
 
+    /**
+     * Sows the seeds of a Kalah Board Counter Clockwise. The board object passed here will have its seeds counts
+     * increments given the passed starting house.
+     * @param board
+     * @param house
+     * @return terminal spot on the board
+     */
     @Override
     public SeedStorage sowSeeds(Board board, House house) {
         if (board == null) throw new NullPointerException("Board can't be null");
@@ -30,6 +37,11 @@ public class CounterClockwiseSeedSower implements SeedSower {
         return recurse(house.getPlayer(), numberOfSeeds, board, seedContainers, house.getPlayer(), house.getIndex() + 1, house);
     }
 
+    /**
+     * This recursive method loops though the given list of implementables until it runs out, if there are still seeds
+     * left to sow then it recurses with the incrementable list of the next player in the game determined by the
+     * NextPlayerFinder implementation.
+     */
     private SeedStorage recurse(int originalPlayer, int seedsLeft, Board board, List<Incrementable> seedContainers, int player, int containerIndex, Incrementable currentTerminal) {
         while (seedsLeft > 0) {
             if (!isOpponentsStore(seedContainers.get(containerIndex), originalPlayer)) {

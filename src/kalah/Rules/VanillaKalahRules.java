@@ -27,6 +27,13 @@ public class VanillaKalahRules implements KalahRules {
         _oppositeHouseFinder = oppositeHouseFinder;
     }
 
+    /**
+     * Alters the board according to the standard Kalah rules given the player's turn and the chosen house index.
+     * @param board
+     * @param player
+     * @param houseIndex
+     * @return number of the player whose turn it is after this turn
+     */
     @Override
     public int doTurn(Board board, int player, int houseIndex) {
         int houseListIndex = houseIndex - 1; // Convert UI index to list index
@@ -52,6 +59,12 @@ public class VanillaKalahRules implements KalahRules {
         return _nextPlayerFinder.findNextPlayer(board, player);
     }
 
+    /**
+     * Returns a boolean value indicating whether the Kalah game is over given which player's turn it is.
+     * @param board
+     * @param player
+     * @return is game over
+     */
     @Override
     public boolean isGameOver(Board board, int player) {
         for (House house : board.getHousesForPlayer(player)) {
@@ -62,6 +75,10 @@ public class VanillaKalahRules implements KalahRules {
         return true;
     }
 
+    /**
+     * Returns the default Kalah rules starting player which is player 1.
+     * @return 1
+     */
     @Override
     public int startingPlayer() {
         return STARTING_PLAYER;
