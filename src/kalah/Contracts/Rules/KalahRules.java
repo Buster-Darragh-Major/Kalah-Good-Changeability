@@ -14,7 +14,17 @@ public interface KalahRules {
      */
     int doTurn(Board board, int player, int houseIndex);
 
+    /**
+     * Checks whether game is over given a players turn and the state of the board.
+     * @param board
+     * @param player
+     * @return true/false indicating game over
+     */
     boolean isGameOver(Board board, int player);
 
+    /**
+     * Returns the player which should start the game in Kalah according to the implementation.
+     * @return staring player
+     */
     int startingPlayer();
 }

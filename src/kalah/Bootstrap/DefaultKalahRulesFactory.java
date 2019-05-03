@@ -1,14 +1,8 @@
 package kalah.Bootstrap;
 
 import kalah.Contracts.Factories.KalahRulesFactory;
-import kalah.Contracts.Rules.KalahRules;
-import kalah.Contracts.Rules.RelativePlayerFinder;
-import kalah.Contracts.Rules.OppositeHouseFinder;
-import kalah.Contracts.Rules.SeedSower;
-import kalah.Rules.CounterClockwiseSeedSower;
-import kalah.Rules.VanillaKalahRules;
-import kalah.Rules.VanillaNextPlayerFinder;
-import kalah.Rules.VanillaOppositeHouseFinder;
+import kalah.Contracts.Rules.*;
+import kalah.Rules.*;
 
 public class DefaultKalahRulesFactory implements KalahRulesFactory {
 
@@ -17,6 +11,7 @@ public class DefaultKalahRulesFactory implements KalahRulesFactory {
         RelativePlayerFinder relativePlayerFinder = new VanillaNextPlayerFinder();
         SeedSower seedSower = new CounterClockwiseSeedSower(relativePlayerFinder);
         OppositeHouseFinder oppositeHouseFinder = new VanillaOppositeHouseFinder();
-        return new VanillaKalahRules(seedSower, relativePlayerFinder, oppositeHouseFinder);
+        CaptureManager captureManager = new VanillaCaptureManager(relativePlayerFinder, oppositeHouseFinder);
+        return new VanillaKalahRules(seedSower, relativePlayerFinder, captureManager);
     }
 }
