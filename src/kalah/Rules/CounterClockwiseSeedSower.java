@@ -38,7 +38,7 @@ public class CounterClockwiseSeedSower implements SeedSower {
     }
 
     /**
-     * This recursive method loops though the given list of implementables until it runs out, if there are still seeds
+     * This recursive method loops though the given list of imcrementables until it runs out, if there are still seeds
      * left to sow then it recurses with the incrementable list of the next player in the game determined by the
      * RelativePlayerFinder implementation.
      */
