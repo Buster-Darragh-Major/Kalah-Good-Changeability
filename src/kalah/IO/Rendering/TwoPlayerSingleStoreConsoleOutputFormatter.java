@@ -1,9 +1,9 @@
 package kalah.IO.Rendering;
 
-import kalah.Contracts.IO.InputInterpreter;
-import kalah.Contracts.Model.Board;
 import kalah.Contracts.IO.Rendering.ConsoleOutputLookAndFeel;
 import kalah.Contracts.IO.Rendering.OutputFormatter;
+import kalah.Contracts.Model.Board;
+import kalah.Exceptions.InvalidBoardException;
 import kalah.Model.House;
 import kalah.Model.Store;
 
@@ -38,6 +38,10 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
      */
     @Override
     public String formatOutput(Board board) {
+        if (board.getNumberOfPlayers() != 2) throw new InvalidBoardException(String.format(
+                "This implementation of OutputFormatter expects a board with 2 players. Received: %d players.",
+                board.getNumberOfPlayers()));
+
         List<House> player1Houses = board.getHousesForPlayer(PLAYER_1_INDEX);
         List<House> player2Houses = board.getHousesForPlayer(PLAYER_2_INDEX);
         Store player1Store = board.getStoresForPlayer(PLAYER_1_INDEX).iterator().next();
