@@ -1,7 +1,7 @@
 package kalah.Rules;
 
 import kalah.Contracts.Model.Board;
-import kalah.Contracts.Rules.NextPlayerFinder;
+import kalah.Contracts.Rules.RelativePlayerFinder;
 import kalah.Contracts.Model.SeedManipulation.Incrementable;
 import kalah.Contracts.Rules.SeedSower;
 import kalah.Model.House;
@@ -13,10 +13,10 @@ import java.util.List;
 
 public class CounterClockwiseSeedSower implements SeedSower {
 
-    private NextPlayerFinder _nextPlayerFinder;
+    private RelativePlayerFinder _relativePlayerFinder;
 
-    public CounterClockwiseSeedSower(NextPlayerFinder nextPlayerFinder) {
-        _nextPlayerFinder = nextPlayerFinder;
+    public CounterClockwiseSeedSower(RelativePlayerFinder relativePlayerFinder) {
+        _relativePlayerFinder = relativePlayerFinder;
     }
 
     /**
@@ -40,7 +40,7 @@ public class CounterClockwiseSeedSower implements SeedSower {
     /**
      * This recursive method loops though the given list of implementables until it runs out, if there are still seeds
      * left to sow then it recurses with the incrementable list of the next player in the game determined by the
-     * NextPlayerFinder implementation.
+     * RelativePlayerFinder implementation.
      */
     private SeedStorage recurse(int originalPlayer, int seedsLeft, Board board, List<Incrementable> seedContainers, int player, int containerIndex, Incrementable currentTerminal) {
         while (seedsLeft > 0) {
@@ -50,7 +50,7 @@ public class CounterClockwiseSeedSower implements SeedSower {
                 seedsLeft--;
             }
             if (++containerIndex >= seedContainers.size()) {
-                player = _nextPlayerFinder.findNextPlayer(board, player);
+                player = _relativePlayerFinder.findNextPlayer(board, player);
                 List<Incrementable> nextPlayersContainers = getPlayersContainers(board, player);
                 return recurse(originalPlayer, seedsLeft, board, nextPlayersContainers, player, 0, currentTerminal);
             }

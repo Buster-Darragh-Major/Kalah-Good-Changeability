@@ -2,7 +2,7 @@ package kalah.Rules;
 
 import kalah.Contracts.Model.Board;
 import kalah.Contracts.Rules.KalahRules;
-import kalah.Contracts.Rules.NextPlayerFinder;
+import kalah.Contracts.Rules.RelativePlayerFinder;
 import kalah.Contracts.Rules.OppositeHouseFinder;
 import kalah.Contracts.Rules.SeedSower;
 import kalah.Exceptions.EmptyHouseException;
@@ -19,12 +19,12 @@ public class VanillaKalahRules implements KalahRules {
     private static final int HOUSE_CAPTURE_SEED_THRESHOLD = 0;
 
     private SeedSower _seedSower;
-    private NextPlayerFinder _nextPlayerFinder;
+    private RelativePlayerFinder _relativePlayerFinder;
     private OppositeHouseFinder _oppositeHouseFinder;
 
-    public VanillaKalahRules(SeedSower seedSower, NextPlayerFinder nextPlayerFinder, OppositeHouseFinder oppositeHouseFinder) {
+    public VanillaKalahRules(SeedSower seedSower, RelativePlayerFinder relativePlayerFinder, OppositeHouseFinder oppositeHouseFinder) {
         _seedSower = seedSower;
-        _nextPlayerFinder = nextPlayerFinder;
+        _relativePlayerFinder = relativePlayerFinder;
         _oppositeHouseFinder = oppositeHouseFinder;
     }
 
@@ -49,7 +49,6 @@ public class VanillaKalahRules implements KalahRules {
             throw new EmptyHouseException(String.format("House %d for player %d is empty", houseIndex, player));
         }
 
-
         SeedStorage terminalSeedStorer = _seedSower.sowSeeds(board, house);
         if ((terminalSeedStorer instanceof House) && (isACapture((House) terminalSeedStorer, player, board))) {
             doCapture((House) terminalSeedStorer, board);
@@ -57,7 +56,7 @@ public class VanillaKalahRules implements KalahRules {
             // If we terminate on the players store it's their turn again.
             return player;
         }
-        return _nextPlayerFinder.findNextPlayer(board, player);
+        return _relativePlayerFinder.findNextPlayer(board, player);
     }
 
     /**
@@ -89,7 +88,7 @@ public class VanillaKalahRules implements KalahRules {
         return house.getPlayer() == player
                 && house.getSeeds() == HOUSE_CAPTURE_SEED_THRESHOLD + 1 // If it's 1 then it would have been 0 before the turn
                 && _oppositeHouseFinder.findOppositeHouse(
-                        board, house, _nextPlayerFinder.findNextPlayer(board, player)).getSeeds() != 0;
+                        board, house, _relativePlayerFinder.findCapturedPlayer(board, player)).getSeeds() != 0;
     }
 
     private void doCapture(House house, Board board) {
@@ -97,7 +96,7 @@ public class VanillaKalahRules implements KalahRules {
         house.decrement(house.getSeeds());
 
         House oppositeHouse = _oppositeHouseFinder.findOppositeHouse(
-                board, house, _nextPlayerFinder.findNextPlayer(board, house.getPlayer()));
+                board, house, _relativePlayerFinder.findCapturedPlayer(board, house.getPlayer()));
         seedsToCapture += oppositeHouse.getSeeds();
         oppositeHouse.decrement(oppositeHouse.getSeeds());
         (board.getStoresForPlayer(house.getPlayer()).get(0)).increment(seedsToCapture);

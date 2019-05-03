@@ -2,7 +2,7 @@ package kalah.Bootstrap;
 
 import kalah.Contracts.Factories.KalahRulesFactory;
 import kalah.Contracts.Rules.KalahRules;
-import kalah.Contracts.Rules.NextPlayerFinder;
+import kalah.Contracts.Rules.RelativePlayerFinder;
 import kalah.Contracts.Rules.OppositeHouseFinder;
 import kalah.Contracts.Rules.SeedSower;
 import kalah.Rules.CounterClockwiseSeedSower;
@@ -14,9 +14,9 @@ public class DefaultKalahRulesFactory implements KalahRulesFactory {
 
     @Override
     public KalahRules createKalahRules() {
-        NextPlayerFinder nextPlayerFinder = new VanillaNextPlayerFinder();
-        SeedSower seedSower = new CounterClockwiseSeedSower(nextPlayerFinder);
+        RelativePlayerFinder relativePlayerFinder = new VanillaNextPlayerFinder();
+        SeedSower seedSower = new CounterClockwiseSeedSower(relativePlayerFinder);
         OppositeHouseFinder oppositeHouseFinder = new VanillaOppositeHouseFinder();
-        return new VanillaKalahRules(seedSower, nextPlayerFinder, oppositeHouseFinder);
+        return new VanillaKalahRules(seedSower, relativePlayerFinder, oppositeHouseFinder);
     }
 }
