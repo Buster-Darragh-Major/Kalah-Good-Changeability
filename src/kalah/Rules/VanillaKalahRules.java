@@ -17,6 +17,8 @@ public class VanillaKalahRules implements KalahRules {
 
     private static final int STARTING_PLAYER = 1;
     private static final int HOUSE_CAPTURE_SEED_THRESHOLD = 0;
+    private static final int GAME_OVER_SEED_THRESHOLD = 0;
+    private static final int INVALID_TURN_SEED_THRESHOLD = 0;
 
     private SeedSower _seedSower;
     private RelativePlayerFinder _relativePlayerFinder;
@@ -45,8 +47,9 @@ public class VanillaKalahRules implements KalahRules {
         }
         House house = playersHouses.get(houseListIndex);
 
-        if (!(house.getSeeds() > 0)) {
-            throw new EmptyHouseException(String.format("House %d for player %d is empty", houseIndex, player));
+        if (!(house.getSeeds() > INVALID_TURN_SEED_THRESHOLD)) {
+            throw new EmptyHouseException(String.format("House %d for player %d is below valid turn threshold: %d",
+                    houseIndex, player, INVALID_TURN_SEED_THRESHOLD));
         }
 
         SeedStorage terminalSeedStorer = _seedSower.sowSeeds(board, house);
@@ -68,7 +71,7 @@ public class VanillaKalahRules implements KalahRules {
     @Override
     public boolean isGameOver(Board board, int player) {
         for (House house : board.getHousesForPlayer(player)) {
-            if (house.getSeeds() > 0) {
+            if (house.getSeeds() > GAME_OVER_SEED_THRESHOLD) {
                 return false;
             }
         }
