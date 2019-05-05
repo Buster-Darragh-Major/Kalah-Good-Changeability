@@ -12,7 +12,6 @@ import kalah.Contracts.Model.Board;
 import kalah.Contracts.Rules.KalahRules;
 import kalah.Exceptions.EmptyHouseException;
 import kalah.Exceptions.HouseDoesntExistException;
-import kalah.test.TestKalah;
 
 /**
  * This class is the starting point for a Kalah implementation using
@@ -26,29 +25,6 @@ public class Kalah {
 	private InputInterpreter _inputInterpreter;
 
 	public static void main(String[] args) {
-//		TestKalah tk = new TestKalah();
-//		tk.run();
-//		tk.testExactLapCapture();
-//		tk.testCapture();
-//		tk.testQuit();
-//		tk.testSimpleStart();
-//		tk.testP1Continue();
-//		tk.testSimpleTwoMoves();
-//		tk.testSingleWrap();
-//		tk.testContinueWrap();
-//		tk.testCapture();
-//		tk.testEmptyHouseCapture();
-//		tk.testFullGame1();
-//		tk.testFullGame2();
-//		tk.testFullGameStore();
-//		tk.testFullGameEmpty();
-//		tk.testFullGameTie();
-//		tk.testFullGameEmptyHouses();
-//		tk.testUseEmpty();
-//		tk.testWrapped();
-//		tk.testDoubleWrap();
-//		tk.testExactLapCapture();
-//		tk.testExactLapEmptyCapture();
 		new Kalah().play(new MockIO());
 	}
 
