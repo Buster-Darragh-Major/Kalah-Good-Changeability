@@ -15,4 +15,10 @@ public interface OutputFormatter {
     String invalidInputPrompt();
 
     String gameOverPrompt();
+
+    String playerScore(int player, int score);
+
+    String playerWins(int player);
+
+    String tie();
 }

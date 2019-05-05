@@ -12,6 +12,7 @@ import kalah.Contracts.Model.Board;
 import kalah.Contracts.Rules.KalahRules;
 import kalah.Exceptions.EmptyHouseException;
 import kalah.Exceptions.HouseDoesntExistException;
+import sun.util.resources.CurrencyNames_sr_BA;
 
 /**
  * This class is the starting point for a Kalah implementation using
@@ -52,6 +53,18 @@ public class Kalah {
 		}
 
 		io.println(_outputFormatter.gameOverPrompt());
+		printBoard(io);
+
+		if (_kalahRules.isGameOver(_board, playersTurn)) {
+			for (int playerNo = 1; playerNo <= _board.getNumberOfPlayers(); playerNo++) {
+				io.println(_outputFormatter.playerScore(playerNo, _board.getScoreForPlayer(playerNo)));
+			}
+			if (_board.getWinningPlayer() == -1) {
+				io.println(_outputFormatter.tie());
+			} else {
+				io.println(_outputFormatter.playerWins(_board.getWinningPlayer()));
+			}
+		}
 	}
 
 	private void printBoard(IO io) {

@@ -18,6 +18,33 @@ public class HashMapBoard implements Board {
     }
 
     @Override
+    public int getScoreForPlayer(int playerNo) {
+        int total = 0;
+        List<SeedStorage> seedStorers = new ArrayList<>();
+        seedStorers.addAll((List<SeedStorage>)(List<?>)_players.get(playerNo).getHouses());
+        seedStorers.addAll((List<SeedStorage>)(List<?>)_players.get(playerNo).getStores());
+        for (SeedStorage seedStorage : seedStorers) {
+            total += seedStorage.getSeeds();
+        }
+        return total;
+    }
+
+    @Override
+    public int getWinningPlayer() {
+        int winningPlayer = -1;
+        int winningPlayerTotal = -1;
+        for (int playerNo : _players.keySet()) {
+            if (winningPlayerTotal < getScoreForPlayer(playerNo)) {
+                winningPlayerTotal = getScoreForPlayer(playerNo);
+                winningPlayer = playerNo;
+            } else if (winningPlayerTotal == getScoreForPlayer(playerNo)) {
+                winningPlayer = -1;
+            }
+        }
+        return winningPlayer;
+    }
+
+    @Override
     public List<House> getHousesForPlayer(int playerNo) {
         return _players.get(playerNo).getHouses();
     }

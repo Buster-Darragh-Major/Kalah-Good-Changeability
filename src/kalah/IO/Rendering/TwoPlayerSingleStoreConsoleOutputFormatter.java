@@ -85,6 +85,21 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
         return "Game over";
     }
 
+    @Override
+    public String playerScore(int player, int score) {
+        return String.format("\tplayer %d:%d", player, score);
+    }
+
+    @Override
+    public String playerWins(int player) {
+        return String.format("Player %d wins!", player);
+    }
+
+    @Override
+    public String tie() {
+        return "A tie!";
+    }
+
     private String synthesizeLine1And5(int numberOfHouses) {
         StringBuilder sb = new StringBuilder();
         sb.append(_lookAndFeel.cellCorner())

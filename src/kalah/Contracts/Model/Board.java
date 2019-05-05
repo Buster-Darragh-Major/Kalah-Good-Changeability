@@ -9,6 +9,10 @@ public interface Board {
 
     int getNumberOfPlayers();
 
+    int getScoreForPlayer(int playerNo);
+
+    int getWinningPlayer();
+
     List<House> getHousesForPlayer(int playerNo);
 
     List<Store> getStoresForPlayer(int playerNo);
