@@ -35,7 +35,7 @@ public class Assignment5VerticalLayout implements OutputFormatter {
         Store player2Store = board.getStoresForPlayer(PLAYER_2_INDEX).iterator().next();
 
         StringBuilder sb = new StringBuilder();
-        sb.append(synthesizeLines1And12())
+        sb.append(synthesizeLine1And12())
                 .append(NEW_LINE)
                 .append(synthesizeLine2(player2Store))
                 .append(NEW_LINE)
@@ -49,7 +49,7 @@ public class Assignment5VerticalLayout implements OutputFormatter {
                 .append(NEW_LINE)
                 .append(synthesizeLine11(player1Store))
                 .append(NEW_LINE)
-                .append(synthesizeLines1And12());
+                .append(synthesizeLine1And12());
 
         return sb.toString();
     }
@@ -94,7 +94,7 @@ public class Assignment5VerticalLayout implements OutputFormatter {
         return "A tie!";
     }
 
-    private String synthesizeLines1And12() {
+    private String synthesizeLine3And10() {
         StringBuilder sb = new StringBuilder();
         sb.append(_lookAndFeel.cellCorner());
         for (int i = 0; i < 2; i++) {
@@ -124,7 +124,7 @@ public class Assignment5VerticalLayout implements OutputFormatter {
         return sb.toString();
     }
 
-    private String synthesizeLine3And10() {
+    private String synthesizeLine1And12() {
         StringBuilder sb = new StringBuilder();
         sb.append(_lookAndFeel.cellCorner());
         for (int i = 0; i < COLUMN_WIDTH * 2 + 1; i++) {
