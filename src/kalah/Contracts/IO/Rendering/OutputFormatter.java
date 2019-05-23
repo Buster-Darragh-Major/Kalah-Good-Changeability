@@ -10,7 +10,7 @@ public interface OutputFormatter {
 
     String turnPrompt(int playerTurn);
 
-    String emptyHousePrompt(int houseNo);
+    String emptyHousePrompt();
 
     String invalidInputPrompt();
 

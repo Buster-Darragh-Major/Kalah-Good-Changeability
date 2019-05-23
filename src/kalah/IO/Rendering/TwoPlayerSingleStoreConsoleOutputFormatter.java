@@ -71,7 +71,7 @@ public class TwoPlayerSingleStoreConsoleOutputFormatter implements OutputFormatt
     }
 
     @Override
-    public String emptyHousePrompt(int houseNo) {
+    public String emptyHousePrompt() {
         return "House is empty. Move again.";
     }
 
