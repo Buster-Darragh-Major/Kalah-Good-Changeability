@@ -61,7 +61,7 @@ public class Assignment5VerticalLayout implements OutputFormatter {
 
     @Override
     public String turnPrompt(int playerTurn) {
-        return String.format("Player P%d's turn - Specify house number or '%s' to quit: ", playerTurn, QUIT_SYMBOL);
+        return String.format("Player P%d's turn - Specify house number or '%s' to quit:", playerTurn, QUIT_SYMBOL);
     }
 
     @Override
