@@ -9,7 +9,7 @@ import kalah.Model.Store;
 
 import java.util.List;
 
-public class Assignment5VerticalLayout implements OutputFormatter {
+public class Assignment5VerticalLayoutOutputFormatter implements OutputFormatter {
 
     private static final int PLAYER_1_INDEX = 1;
     private static final int PLAYER_2_INDEX = 2;
@@ -19,7 +19,7 @@ public class Assignment5VerticalLayout implements OutputFormatter {
 
     private ConsoleOutputLookAndFeel _lookAndFeel;
 
-    public Assignment5VerticalLayout(ConsoleOutputLookAndFeel lookAndFeel) {
+    public Assignment5VerticalLayoutOutputFormatter(ConsoleOutputLookAndFeel lookAndFeel) {
         _lookAndFeel = lookAndFeel;
     }
 
