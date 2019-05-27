@@ -1,7 +1,10 @@
 package kalah.Rules;
 
 import kalah.Contracts.Model.Board;
-import kalah.Contracts.Rules.*;
+import kalah.Contracts.Rules.CaptureManager;
+import kalah.Contracts.Rules.KalahRules;
+import kalah.Contracts.Rules.RelativePlayerFinder;
+import kalah.Contracts.Rules.SeedSower;
 import kalah.Exceptions.EmptyHouseException;
 import kalah.Exceptions.HouseDoesntExistException;
 import kalah.Model.House;

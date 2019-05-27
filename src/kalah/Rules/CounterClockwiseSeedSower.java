@@ -1,8 +1,8 @@
 package kalah.Rules;
 
 import kalah.Contracts.Model.Board;
-import kalah.Contracts.Rules.RelativePlayerFinder;
 import kalah.Contracts.Model.SeedManipulation.Incrementable;
+import kalah.Contracts.Rules.RelativePlayerFinder;
 import kalah.Contracts.Rules.SeedSower;
 import kalah.Model.House;
 import kalah.Model.SeedStorage;
